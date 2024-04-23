@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="KursovayaMAIN.View.WeaponsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KursovayaMAIN.View" xmlns:viewmodel="clr-namespace:KursovayaMAIN.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1028" Height="1000" Width="1028">
+    <Grid Height="1000" Margin="-136, -26,-96,-45">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="870"/>
+        </Grid.RowDefinitions>
+        <Border Width="1028" Grid.RowSpan="2" Height="946" Background="DarkGray" HorizontalAlignment="Right" Padding="0 5 5 5"
+    CornerRadius="20" BorderBrush="Black" BorderThickness="1.5" VerticalAlignment="Top" Margin="0 0 95 0">
+            <StackPanel Grid.RowSpan="2" Orientation="Vertical" Width="1020">
+                <Menu Background="CadetBlue" Width="240" Height="50" FontSize="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                          Foreground="White" Grid.Row="0" BorderThickness="2" BorderBrush="Black" Margin="700 20 0 0" Padding="42 4 0 0">
+                    <MenuItem Header="Сортировка" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <MenuItem x:Name="DescBtn" Header="По убыванию" Command="{Binding DataContext.SortDescendingCommandWeapon, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                Margin="-18 0 0 0" Background="Black" Width="180" Height="50" FontSize="12"/>
+                        <MenuItem x:Name="AscBtn"  Header="По возрастанию" Command="{Binding DataContext.SortAscendingCommandWeapon, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Margin="-18 0 0 0" Background="Black" Width="180" Height="50" FontSize="12"/>
+                    </MenuItem>
+                </Menu>
+                <Border Width="1002" Grid.Row="0" Background="White" Padding="0 2 2 2" 
+            CornerRadius="30" BorderBrush="Black" BorderThickness="3" Height="80" Margin="-2 12 0 0">
+                    <TextBlock Text="Список вооружения" 
+                   FontSize="40" FontWeight="UltraBlack" Width="910" Height="60" TextWrapping="Wrap" TextAlignment="Center"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" Margin="0,5,0,0"/>
+                </Border>
+                <Border x:Name="brd_2" Width="1000" Height="748" Background="LightGray" 
+                    CornerRadius="30" Margin="0 15 0 0">
+                    <DataGrid x:Name="weaponsList" AutoGenerateColumns="False" ItemsSource="{Binding WeaponsCollectionView}" 
+                      Grid.Row="1" Margin="20 20 20 20" GridLinesVisibility="None" HeadersVisibility="None"
+                      Background="White" SelectedItem="{Binding SelectedWeapon}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Название вооружения">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Margin="20 20 20 20" FontSize="25">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0}. {1}">
+                                                    <Binding Path="weaponId " />
+                                                    <Binding Path="WeaponName" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
